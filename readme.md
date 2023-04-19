@@ -1,14 +1,14 @@
 **TODO CRUD REST API**
 
-`GET /todo` - get todo list
+`GET /todos` - get todo list
 
-`GET /todo/:id` - get todo by id
+`GET /todos/:id` - get todo by id
 
-`POST /todo` - create todo
+`POST /todos` - create todo
 
-`PUT /todo/:id` - update todo
+`PUT /todos/:id` - update todo
 
-`DELETE /todo/:id` - delete todo
+`DELETE /todos/:id` - delete todo
 
 Todo model
 
