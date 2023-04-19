@@ -16,7 +16,7 @@ Todo model
 {
   "id": 0,
   "description": "",
-  "completed": false
+  "completed": "0"
 }
 ```
 
