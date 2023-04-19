@@ -1,14 +1,15 @@
 **TODO CRUD REST API**
 
-`GET /todos` - get todo list
 
-`GET /todos/:id` - get todo by id
+`GET localhost:8080/api/v1/todos` - get todo list
 
-`POST /todos` - create todo
+`GET localhost:8080/api/v1/todos/:id` - get todo by id
 
-`PUT /todos/:id` - update todo
+`POST localhost:8080/api/v1/todos` - create todo
 
-`DELETE /todos/:id` - delete todo
+`PUT localhost:8080/api/v1/todos/:id` - update todo
+
+`DELETE localhost:8080/api/v1/todos/:id` - delete todo
 
 Todo model
 
@@ -23,7 +24,7 @@ Todo model
 **Usage**
 
 * install composer dependencies
-* Run app by `php -S 0.0.0.0:8`
+* Run app by `php -S localhost:8080`
 * run tests by `php vendor/bin/codecept run Api` 
 
 **Goals**
