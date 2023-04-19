@@ -31,7 +31,7 @@ Todo model
 
 * Fork repo
 * Write appropriate methods in `app/api.php` so all tests are passed
-* Commit changes to forks taking into account gitflow
-* Create PR to main repo and assign repo owner as reviewer
+* Commit changes taking into account gitflow
+* Create PR and assign repo owner as reviewer
 
 *Note*: `POST`, `PUT` requests should return changed model
