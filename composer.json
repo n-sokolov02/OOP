@@ -1,0 +1,9 @@
+{
+    "require": {
+        "codeception/codeception": "*",
+        "codeception/module-rest": "*",
+        "codeception/module-phpbrowser": "*",
+        "codeception/module-asserts": "*",
+        "ext-json": "*"
+    }
+}
