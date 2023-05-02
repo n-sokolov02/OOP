@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Api;
 
 use Codeception\Util\HttpCode;
@@ -14,6 +13,7 @@ class TodoCest
     {
         $newTodo = [
             "description" => 'test',
+            "completed" => false
         ];
 
         $I->sendPost('/todos', $newTodo);
@@ -27,7 +27,7 @@ class TodoCest
         $I->seeResponseMatchesJsonType([
             'id' => 'integer|string',
             'description' => 'string',
-            'completed' => 'string'
+            'completed' => 'boolean'
         ]);
     }
 
@@ -39,25 +39,27 @@ class TodoCest
         $I->seeResponseMatchesJsonType([
             'id' => 'integer|string',
             'description' => 'string',
-            'completed' => 'string'
+            'completed' => 'boolean'
         ]);
     }
 
     public function testRead(ApiTester $I) {
-        $I->sendGet(sprintf('/todos/%s', $this->todo_id));
+        $I->sendGet(sprintf('/todos/%s', $this->todo_id ?? 1));
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeResponseIsJson();
 
         $I->seeResponseMatchesJsonType([
             'id' => 'integer|string',
             'description' => 'string',
-            'completed' => 'string'
+            'completed' => 'boolean'
         ]);
+
+        $I->seeResponseContainsJson(array('id' => $this->todo_id));
     }
 
     public function testUpdate(ApiTester $I) {
         $I->sendPut(sprintf('/todos/%s', $this->todo_id), [
-            'completed' => "1"
+            'completed' => true
         ]);
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeResponseIsJson();
@@ -65,10 +67,10 @@ class TodoCest
         $I->seeResponseMatchesJsonType([
             'id' => 'integer|string',
             'description' => 'string',
-            'completed' => 'string'
+            'completed' => 'boolean'
         ]);
 
-        $I->seeResponseContainsJson(array('completed' => "1"));
+        $I->seeResponseContainsJson(array('completed' => true));
     }
 
     public function testDelete(ApiTester $I) {
