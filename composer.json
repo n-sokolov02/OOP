@@ -5,5 +5,10 @@
         "codeception/module-phpbrowser": "*",
         "codeception/module-asserts": "*",
         "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app"
+        }
     }
 }

@@ -1,44 +1,22 @@
 <?php
-require_once './app/api.php';
-
-$method = $_SERVER['REQUEST_METHOD'];
-
-$request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-if(preg_match('/\/api\/v1\/todos\/?(?P<id>\w*)/', $request_uri, $matches)) {
-    list('id' => $id) = $matches;
-}
-
-$respond = '';
-$status_code = 200;
-
-switch ($method) {
-    case 'GET':
-        if ($id) {
-            $respond = readTodo($id);
-        } else {
-            $respond = listTodo();
-        }
-        break;
-    case 'POST':
-        $respond = createTodo($_REQUEST);
-        $status_code = 201;
-        break;
-    case 'PUT':
-        $putData = [];
-        parse_str(file_get_contents("php://input"), $putData);
-        $respond = editTodo($id, $putData);
-        break;
-    case 'DELETE':
-        if (deleteTodo($id)) {
-            $status_code = 204;
-            $respond = null;
-        } else {
-            $status_code = 404;
-        }
-
-}
+require __DIR__ . '/vendor/autoload.php';
+use App\Api;
+use App\Controllers\TodoController;
+use App\Repositories\TodoRepository;
+use App\Storage\JsonStorage;
+use App\HttpMethods;
 
 
-header('Content-type: application/json', true, $status_code);
-echo json_encode($respond);
+$todoStorage = new JsonStorage('data.json');
+$todoRepository = new TodoRepository($todoStorage);
+$todoController = new TodoController($todoRepository);
+
+$api = new Api('api/v1');
+
+$api->add_route(HttpMethods::GET, '/todos/:id', [$todoController, 'readTodo']);
+$api->add_route(HttpMethods::GET, '/todos', [$todoController, 'listTodo']);
+$api->add_route(HttpMethods::POST, '/todos', [$todoController, 'createTodo']);
+$api->add_route(HttpMethods::PUT, '/todos/:id', [$todoController, 'editTodo']);
+$api->add_route(HttpMethods::DELETE, '/todos/:id', [$todoController, 'deleteTodo']);
+
+$api->run();
