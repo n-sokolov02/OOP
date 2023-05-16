@@ -7,11 +7,6 @@ use App\Storage\JsonStorage;
 use App\Exceptions\NotFound;
 use function PHPUnit\Framework\isEmpty;
 
-
-
-//use mysql_xdevapi\Exception;
-//use Psy\Exception\ErrorException;
-//use Psy\Util\Json;
 require_once "app\Interfaces\StorageInterface.php";
 require_once "app\Interfaces\TodoInterface.php";
 require_once "app\Interfaces\TodoRepositoryInterface.php";
@@ -101,32 +96,6 @@ class  TodoRepository implements TodoRepositoryInterface
      */
     public function update(int $id, mixed $data): Todo
     {
-//        $all_todos = $this->storage->read();
-//        if (is_array($data))
-//        {
-//            $input = $data;
-//        } else $input = [];
-//
-//        $find_todo = $this->get_by_id($id);
-//        if (array_key_exists('description', $input))
-//        {
-//            if ($input['description'] !== null)
-//            {
-//                $find_todo->set_description($input['description']);
-//
-//                $all_todos[$id] = $find_todo;
-//                $this->storage->write($all_todos);
-//            }
-//        }
-//        if ($input['completed'] !==null)
-//        {
-//            $find_todo->set_completed($input['completed']);
-//
-//            $all_todos[$id] = $find_todo;
-//            $this->storage->write($all_todos);
-//        }
-//
-//        return $find_todo;
 
         if (is_array($data)) {
             $input = $data;

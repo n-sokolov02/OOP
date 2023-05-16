@@ -33,7 +33,7 @@ class TodoController
      */
     function createTodo (HttpRequest $request): void
     {
-        if ($request->get_method() !== 'POST' || $request->get_uri() !== '/api/v1/todos') {
+        if ($request->get_method() !== 'POST') {
             JsonResponse::routeNotDefined();
             return;
         }
